@@ -1,0 +1,27 @@
+Bước 1: Tạo file jwt.p12
+
+keytool -genkeypair ^
+  -alias jwt ^
+  -keyalg RSA ^
+  -keysize 2048 ^
+  -storetype PKCS12 ^
+  -keystore jwt.p12 ^
+  -storepass 123456 ^
+  -keypass 123456 ^
+  -validity 3650 ^
+  -dname "CN=JWT, OU=DEV, O=LOCAL, L=HCM, S=HCM, C=VN"
+
+
+Bước 2: Xuất certificate ra file cert.pem (file “cert”)
+
+keytool -exportcert ^
+  -alias jwt ^
+  -keystore jwt.p12 ^
+  -storetype PKCS12 ^
+  -storepass 123456 ^
+  -rfc ^
+  -file cert.pem
+
+
+Bước 3: Tạo pubkey.pem (file “pubkey”)
+openssl x509 -in cert.pem -pubkey -noout > pubkey.pem

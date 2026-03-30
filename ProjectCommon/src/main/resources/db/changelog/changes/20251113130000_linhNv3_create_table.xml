@@ -1,0 +1,234 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="table_device_tokens" author="Panda">
+        <createTable tableName="device_tokens">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="jti" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_token" type="NVARCHAR(1000)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="creator" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updater" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="login_histories">
+        <createTable tableName="login_histories">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ip_address" type="VARCHAR(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="success" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+            <column name="creator" defaultValueComputed="'system'" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updater" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="oauth_access_token">
+        <createTable tableName="oauth_access_token">
+            <column name="authentication_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_access_token"/>
+            </column>
+            <column name="token" type="BLOB"/>
+            <column name="token_id" type="TEXT"/>
+            <column name="user_name" type="TEXT"/>
+            <column name="client_id" type="TEXT"/>
+            <column name="authentication" type="BLOB"/>
+            <column name="refresh_token" type="TEXT"/>
+            <column name="device_token" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="oauth_approvals">
+        <createTable tableName="oauth_approvals">
+            <column name="userId" type="VARCHAR(255)"/>
+            <column name="clientId" type="TEXT"/>
+            <column name="scope" type="TEXT"/>
+            <column name="status" type="VARCHAR(10)"/>
+            <column name="expires_at" type="TIMESTAMP"/>
+            <column name="last_modified_at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="oauth_client_details">
+        <createTable tableName="oauth_client_details">
+            <column name="client_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_client_details"/>
+            </column>
+            <column name="resource_ids" type="TEXT"/>
+            <column name="client_secret" type="TEXT"/>
+            <column name="scope" type="TEXT"/>
+            <column name="authorized_grant_types" type="TEXT"/>
+            <column name="web_server_redirect_uri" type="TEXT"/>
+            <column name="authorities" type="TEXT"/>
+            <column name="access_token_validity" type="INTEGER"/>
+            <column name="refresh_token_validity" type="INTEGER"/>
+            <column name="additional_information" type="TEXT"/>
+            <column name="autoapprove" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="oauth_client_token">
+        <createTable tableName="oauth_client_token">
+            <column name="authentication_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_client_token"/>
+            </column>
+            <column name="token" type="BLOB"/>
+            <column name="token_id" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+            <column name="client_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="oauth_code">
+        <createTable tableName="oauth_code">
+            <column name="code" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_code"/>
+            </column>
+            <column name="authentication" type="BLOB"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="oauth_refresh_token">
+        <createTable tableName="oauth_refresh_token">
+            <column name="token_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_refresh_token"/>
+            </column>
+            <column name="token" type="BLOB"/>
+            <column name="authentication" type="BLOB"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="users">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="login_id" type="VARCHAR(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(128)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="gender" defaultValue="U" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+            <column name="height_cm" type="FLOAT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight_kg" type="FLOAT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="point" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime"/>
+            <column name="creator" defaultValueComputed="'system'" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updater" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Panda" id="users-add-is-deleted">
+        <addColumn tableName="users">
+            <column name="is_deleted" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="Panda" id="insert-initial-users">
+        <insert tableName="users">
+            <column name="login_id" value="user001"/>
+            <column name="password_hash" value="$2a$10$ZOXnRQmJhSZ4v5ZnZPl83unE/Mm6lL/czofh1Wzc2medXdBgN17CG"/>
+            <column name="full_name" value="User 001"/>
+            <column name="gender" value="M"/>
+            <column name="email" value="test1@gmail.com"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="login_id" value="user002"/>
+            <column name="password_hash" value="$2a$10$KRGPq4ouVra4PBoxnCjI.ehsks3gswgx453Y4csSfBAnYzVkBAnYzVkB/lYe"/>
+            <column name="full_name" value="User 002"/>
+            <column name="gender" value="F"/>
+            <column name="email" value="test2@gmail.com"/>
+        </insert>
+    </changeSet>
+
+
+    <!-- Add role column to users -->
+    <changeSet author="Panda" id="users-add-role-column">
+        <addColumn tableName="users">
+            <column name="role" type="VARCHAR(50)" defaultValue="ROLE_USER">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <!-- Set roles for existing seeded users -->
+    <changeSet author="Panda" id="users-seed-roles">
+        <!-- user001 => ROLE_USER -->
+        <update tableName="users">
+            <column name="role" value="ROLE_USER"/>
+            <where>login_id = 'user001'</where>
+        </update>
+
+        <!-- user002 => ROLE_ADMIN (ví dụ) -->
+        <update tableName="users">
+            <column name="role" value="ROLE_ADMIN"/>
+            <where>login_id = 'user002'</where>
+        </update>
+
+        <!-- Nếu muốn thêm 1 user ROLE_ADMIN_GROUP thì bạn update tương tự:
+        <update tableName="users">
+            <column name="role" value="ROLE_ADMIN_GROUP"/>
+            <where>login_id = 'user003'</where>
+        </update>
+        -->
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,24 @@
+server:
+  port: 9091
+
+security:
+  origin:
+    domain: ${ORIGIN_DOMAIN:}
+    allow: ${ORIGIN_ALLOW:true}
+  oauth2:
+    client:
+      client-id: mobile-client
+      client-secret: mobile-client
+    resource:
+      tokenInfoUri: ${AUTH_SERVER_URL:http://localhost:9191}/oauth/check_token
+
+spring:
+  datasource:
+    url: ${WRITE_DATASOURCE_URL:jdbc:mysql://localhost:3307/2Port1Image?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC}
+    username: user001
+    password: user001
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false

@@ -1,0 +1,66 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="Panda" id="insert_multiple_oauth_clients">
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="server-server"/>
+            <column name="resource_ids" value="resource_id"/>
+            <column name="client_secret" value="$2a$10$VamsQjlA0I39TsLt6mF0w.PI82ndSYGzUkRfQJxuZ1bYF2gRgyt56"/>
+            <column name="scope" value="read,write,trust"/>
+            <column name="authorized_grant_types" value="client_credentials"/>
+            <column name="web_server_redirect_uri" value=""/>
+            <column name="authorities" value=""/>
+            <column name="access_token_validity" valueNumeric="500"/>
+            <column name="refresh_token_validity" valueNumeric="500"/>
+            <column name="additional_information" value=""/>
+            <column name="autoapprove" value="true"/>
+        </insert>
+
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="external-server"/>
+            <column name="resource_ids" value="resource_id"/>
+            <column name="client_secret" value="$2a$10$KAFPX.jFDWAHeMquYba7EOWHUAb7kucIAGUXbxPSr7xalnkJHebZq"/>
+            <column name="scope" value="read,write,trust"/>
+            <column name="authorized_grant_types" value="client_credentials"/>
+            <column name="web_server_redirect_uri" value=""/>
+            <column name="authorities" value=""/>
+            <column name="access_token_validity" valueNumeric="500"/>
+            <column name="refresh_token_validity" valueNumeric="500"/>
+            <column name="additional_information" value=""/>
+            <column name="autoapprove" value="true"/>
+        </insert>
+
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="mobile-client"/>
+            <column name="resource_ids" value="resource_id"/>
+            <column name="client_secret" value="$2a$10$ylu0PqXegVykftCUCNXMXOru9b.1..FEcL..gl9mnwDX4LbPiHP6W"/>
+            <column name="scope" value="read,write,trust"/>
+            <column name="authorized_grant_types" value="password,refresh_token,implicit,authorization_code"/>
+            <column name="web_server_redirect_uri" value=""/>
+            <column name="authorities" value=""/>
+            <column name="access_token_validity" valueNumeric="500"/>
+            <column name="refresh_token_validity" valueNumeric="500"/>
+            <column name="additional_information" value=""/>
+            <column name="autoapprove" value="true"/>
+        </insert>
+
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="admin-client"/>
+            <column name="resource_ids" value="resource_id"/>
+            <column name="client_secret" value="$2a$10$CJFZ/W7mIyx7B2nk14MMk.M.F9UT5qt5eVHI4819aVO/sIKa9uqSa"/>
+            <column name="scope" value="read,write,trust"/>
+            <column name="authorized_grant_types" value="password,refresh_token,implicit,authorization_code"/>
+            <column name="web_server_redirect_uri" value=""/>
+            <column name="authorities" value=""/>
+            <column name="access_token_validity" valueNumeric="500"/>
+            <column name="refresh_token_validity" valueNumeric="500"/>
+            <column name="additional_information" value=""/>
+            <column name="autoapprove" value="true"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

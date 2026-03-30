@@ -1,0 +1,24 @@
+services:
+  api-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-java-api
+    ports:
+      - "9090:9090"
+    # Ghi đè lệnh chạy để chạy module API
+    command: ["java", "-jar", "/app/project-api.jar"]
+    restart: always
+
+  oauth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-java-oauth
+    ports:
+      - "9191:9191"
+    # Ghi đè lệnh chạy để chạy module Oauth
+    command: ["java", "-jar", "/app/project-oauth.jar"]
+    restart: always
+
+  #docker-compose up --build
