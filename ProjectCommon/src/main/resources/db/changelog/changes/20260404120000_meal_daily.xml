@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create_m_food_master" author="system">
+        <createTable tableName="m_food_master">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity_label" type="VARCHAR(50)"/>
+            <column name="calories" type="FLOAT"/>
+            <column name="image_url" type="VARCHAR(500)"/>
+            <column name="protein" type="FLOAT"/>
+            <column name="fat" type="FLOAT"/>
+            <column name="carbohydrate" type="FLOAT"/>
+            <column name="fiber" type="FLOAT"/>
+            <column name="salt" type="FLOAT"/>
+            <column name="sugar" type="FLOAT"/>
+            <column name="creator" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updater" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_user_meal" author="system">
+        <createTable tableName="user_meal">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_of_day" type="VARCHAR(50)"/>
+            <column name="creator" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updater" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_user_meal_item" author="system">
+        <createTable tableName="user_meal_item">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="meal_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="food_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="FLOAT"/>
+            <column name="custom_ratio" type="FLOAT"/>
+            <column name="creator" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updater" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_meal_image" author="system">
+        <createTable tableName="meal_image">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="meal_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_id_meal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updater" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
